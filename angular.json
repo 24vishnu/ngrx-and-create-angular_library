@@ -2,5 +2,320 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "mazic-string": {
+      "projectType": "library",
+      "root": "projects/mazic-string",
+      "sourceRoot": "projects/mazic-string/src",
+      "prefix": "vishnu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mazic-string/tsconfig.lib.json",
+            "project": "projects/mazic-string/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mazic-string/src/test.ts",
+            "tsConfig": "projects/mazic-string/tsconfig.spec.json",
+            "karmaConfig": "projects/mazic-string/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mazic-string/tsconfig.lib.json",
+              "projects/mazic-string/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mazic-string-example": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/mazic-string-example",
+      "sourceRoot": "projects/mazic-string-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/mazic-string-example",
+            "index": "projects/mazic-string-example/src/index.html",
+            "main": "projects/mazic-string-example/src/main.ts",
+            "polyfills": "projects/mazic-string-example/src/polyfills.ts",
+            "tsConfig": "projects/mazic-string-example/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/mazic-string-example/src/favicon.ico",
+              "projects/mazic-string-example/src/assets"
+            ],
+            "styles": [
+              "projects/mazic-string-example/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/mazic-string-example/src/environments/environment.ts",
+                  "with": "projects/mazic-string-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mazic-string-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mazic-string-example:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mazic-string-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mazic-string-example/src/test.ts",
+            "polyfills": "projects/mazic-string-example/src/polyfills.ts",
+            "tsConfig": "projects/mazic-string-example/tsconfig.spec.json",
+            "karmaConfig": "projects/mazic-string-example/karma.conf.js",
+            "assets": [
+              "projects/mazic-string-example/src/favicon.ico",
+              "projects/mazic-string-example/src/assets"
+            ],
+            "styles": [
+              "projects/mazic-string-example/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mazic-string-example/tsconfig.app.json",
+              "projects/mazic-string-example/tsconfig.spec.json",
+              "projects/mazic-string-example/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/mazic-string-example/e2e/protractor.conf.js",
+            "devServerTarget": "mazic-string-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mazic-string-example:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "customer": {
+      "projectType": "library",
+      "root": "projects/customer",
+      "sourceRoot": "projects/customer/src",
+      "prefix": "ctm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/customer/tsconfig.lib.json",
+            "project": "projects/customer/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/customer/src/test.ts",
+            "tsConfig": "projects/customer/tsconfig.spec.json",
+            "karmaConfig": "projects/customer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/customer/tsconfig.lib.json",
+              "projects/customer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngrx-customer": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngrx-customer",
+      "sourceRoot": "projects/ngrx-customer/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngrx-customer",
+            "index": "projects/ngrx-customer/src/index.html",
+            "main": "projects/ngrx-customer/src/main.ts",
+            "polyfills": "projects/ngrx-customer/src/polyfills.ts",
+            "tsConfig": "projects/ngrx-customer/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/ngrx-customer/src/favicon.ico",
+              "projects/ngrx-customer/src/assets"
+            ],
+            "styles": [
+              "projects/ngrx-customer/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngrx-customer/src/environments/environment.ts",
+                  "with": "projects/ngrx-customer/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngrx-customer:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngrx-customer:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngrx-customer:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngrx-customer/src/test.ts",
+            "polyfills": "projects/ngrx-customer/src/polyfills.ts",
+            "tsConfig": "projects/ngrx-customer/tsconfig.spec.json",
+            "karmaConfig": "projects/ngrx-customer/karma.conf.js",
+            "assets": [
+              "projects/ngrx-customer/src/favicon.ico",
+              "projects/ngrx-customer/src/assets"
+            ],
+            "styles": [
+              "projects/ngrx-customer/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngrx-customer/tsconfig.app.json",
+              "projects/ngrx-customer/tsconfig.spec.json",
+              "projects/ngrx-customer/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngrx-customer/e2e/protractor.conf.js",
+            "devServerTarget": "ngrx-customer:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngrx-customer:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "mazic-string"
 }

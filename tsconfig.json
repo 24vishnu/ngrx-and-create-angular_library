@@ -17,7 +17,21 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "mazic-string": [
+        "dist/mazic-string"
+      ],
+      "mazic-string/*": [
+        "dist/mazic-string/*"
+      ],
+      "customer": [
+        "dist/customer"
+      ],
+      "customer/*": [
+        "dist/customer/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
