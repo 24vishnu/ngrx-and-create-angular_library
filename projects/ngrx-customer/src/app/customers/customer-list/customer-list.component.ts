@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import * as customerAction from 'customer';
 import * as fromCustomer from 'customer';
-import { Customer } from 'customer'; 
+import { Customer } from 'customer';
 
 @Component({
   selector: 'app-customer-list',
@@ -13,15 +13,23 @@ import { Customer } from 'customer';
 })
 export class CustomerListComponent implements OnInit {
   customers$: Observable<Customer[]>;
+  error$: Observable<string>;
 
   constructor(private store: Store<fromCustomer.AppState>) { }
 
   ngOnInit() {
-    // dispatch an action with type payload
-    // this.store.dispatch({type: 'LOAD_CUSTOMERS'});
     this.store.dispatch(new customerAction.LoadCustomers());
-    // this.store.subscribe( state => { this.customers = state.customers.customers; });
-    // we are subscribing the selector here
     this.customers$ = this.store.pipe(select(fromCustomer.getCustomers));
+    this.error$ = this.store.pipe(select(fromCustomer.getCustomersError));
+  }
+
+  deleteCustomer(customer: Customer) {
+    if (confirm('Are You Sure')) {
+      this.store.dispatch(new customerAction.DeleteCustomer(customer.id));
+    }
+  }
+
+  editCustomer(customer: Customer) {
+    this.store.dispatch(new customerAction.LoadCustomer(customer.id));
   }
 }

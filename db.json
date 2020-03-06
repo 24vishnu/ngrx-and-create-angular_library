@@ -1,18 +1,25 @@
 {
-    "customers": [
-        {
-            "name": "vishnu",
-            "phone": "8738864640",
-            "address": "Agra",
-            "membership": "Platinum",
-            "id": 1
-        },
-        {
-            "name": "Jhon Doe",
-            "phone": "910928492098",
-            "address": "123 Sun Street",
-            "membership": "Pro",
-            "id": 2
-        }
-    ]
+  "customers": [
+    {
+      "name": "vishnu",
+      "phone": "8738864640",
+      "address": "Agra",
+      "membership": "Platinum",
+      "id": 1
+    },
+    {
+      "name": "Jhon Doe",
+      "phone": "910928492098",
+      "address": "123 Sun Street",
+      "membership": "Pro",
+      "id": 2
+    },
+    {
+      "name": "BBAA",
+      "phone": "22121212",
+      "address": "India",
+      "membership": "Pro",
+      "id": 4
+    }
+  ]
 }

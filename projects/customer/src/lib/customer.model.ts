@@ -1,7 +1,7 @@
 export interface Customer {
     id?: number;
     name: string;
-    phonr: string;
+    phone: string;
     address: string;
     membership: string;
 }

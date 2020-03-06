@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, select } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as customerAction from './customer.actions';
 import { Customer } from '../customer.model';
@@ -47,13 +47,7 @@ export const initialState = customerAdaptor.getInitialState(defaultCustomer);
 export function customerReducer( state = initialState, action: customerAction.Actions): CustomerState {
     // reducer have switch statement and it going to return a different state based on the action type
     switch (action.type) {
-        case customerAction.CustomerActionTypes.LOAD_CUSTOMERS: {
-            // this return the current state and loading through property true
-            return {
-                ...state,
-                loading: true
-            };
-        }
+        
         case customerAction.CustomerActionTypes.LOAD_CUSTOMERS_SUCCESS: {
             /*
             // this return the current state through properties loading false and loaded ture
@@ -85,6 +79,56 @@ export function customerReducer( state = initialState, action: customerAction.Ac
                 error: action.payload
             };
         }
+        
+        case customerAction.CustomerActionTypes.LOAD_CUSTOMER_SUCCESS: {
+           // here we use selected customer ID property that will need when we load the customer in edit customer component
+           return customerAdaptor.addOne(action.payload, {
+                ...state,
+                selectedCustomerId: action.payload.id    
+            })
+        }
+        case customerAction.CustomerActionTypes.LOAD_CUSTOMER_FAIL: {
+            return {
+                ...state,
+                error: action.payload
+            };
+        }
+
+        
+        case customerAction.CustomerActionTypes.CREATE_CUSTOMER_SUCCESS: {
+            // here we pass the payload and the state
+            return customerAdaptor.addOne(action.payload, state)
+         }
+         case customerAction.CustomerActionTypes.CREATE_CUSTOMER_FAIL: {
+             return {
+                 ...state,
+                 error: action.payload
+             };
+         }
+         
+        case customerAction.CustomerActionTypes.UPDATE_CUSTOMER_SUCCESS: {
+            // here we use updateOne() method of customerAdaptor
+            return customerAdaptor.updateOne(action.payload, state)
+         }
+         case customerAction.CustomerActionTypes.UPDATE_CUSTOMER_FAIL: {
+             return {
+                 ...state,
+                 error: action.payload
+             };
+         }
+
+         
+        case customerAction.CustomerActionTypes.DELETE_CUSTOMER_SUCCESS: {
+            // here we use updateOne() method of customerAdaptor
+            return customerAdaptor.removeOne(action.payload, state)
+         }
+         case customerAction.CustomerActionTypes.DELETE_CUSTOMER_FAIL: {
+             return {
+                 ...state,
+                 error: action.payload
+             };
+         }
+
         default: {
             // default state is return the current state
             return state;
@@ -129,4 +173,15 @@ export const getCustomersLoaded = createSelector(
 export const getCustomersError = createSelector(
     getCustomerFeatureState,
     (state: CustomerState) => state.error
+);
+
+export const getCurrentCustomerId = createSelector(
+    getCustomerFeatureState,
+    (state: CustomerState) => state.selectedCustomerId
+);
+
+export const getCurrentCustomer = createSelector(
+    getCustomerFeatureState,
+    getCurrentCustomerId,
+    state => state.entities[state.selectedCustomerId]
 );

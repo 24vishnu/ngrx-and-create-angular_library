@@ -7,6 +7,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerModule } from 'customer';
 
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+
 const customerRoutes: Routes = [
   {path: '', component: CustomerComponent}
 ];
@@ -22,6 +24,9 @@ const customerRoutes: Routes = [
     CommonModule,
     CustomerModule, // my customer library module
     RouterModule.forChild(customerRoutes),
+
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class CustomersModule { }
