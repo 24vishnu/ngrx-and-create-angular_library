@@ -82,7 +82,7 @@ export class UpdateCustomer implements Action {
 
 export class UpdateCustomerSuccess implements Action {
   readonly type = CustomerActionTypes.UPDATE_CUSTOMER_SUCCESS;
-  // here payload is going to be type update that comes form entity library 
+  // here payload is going to be type update that comes form entity library
   constructor(public payload: Update<Customer>) {}
 }
 
